@@ -8,10 +8,16 @@ export const authenticateToken = (req, res, next) => {
         const secretKey = process.env.JWT_SECRET_KEY || '';
         jwt.verify(token, secretKey, (err, user) => {
             if (err) {
-                return res.sendStatus(403);
+                res.sendStatus(403);
+                return;
             }
-            req.user = user;
-            next();
+            if (user) {
+                req.user = user;
+                next();
+            }
+            else {
+                res.sendStatus(403);
+            }
         });
     }
     else {

@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 export const login = async (req, res) => {
     // If the user exists and the password is correct, return a JWT token
-    const { username, password } = req.body; // Extract username and password from request body
+    const { username, password } = req.body;
     // Find the user in the database by username
     const user = await User.findOne({
         where: { username },

@@ -18,11 +18,16 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
 
     jwt.verify(token, secretKey, (err, user) => {
       if (err) {
-        return res.sendStatus(403);
+        res.sendStatus(403);
+        return;
       }
 
-      req.user = user as JwtPayload;
-      next();
+      if (user) {
+        req.user = user as JwtPayload;
+        next();
+      } else {
+        res.sendStatus(403);
+      }
     });
   } else {
     res.sendStatus(401);
