@@ -1,4 +1,4 @@
-# Kanban Board
+# Krazy Kanban Board
 
 A full-stack Kanban board application for organizing tasks and projects. Built with a modern JavaScript stack, this app allows users to register, log in, and manage tasks across customizable columns.
 
