@@ -17,21 +17,23 @@ export const login = async (req: Request, res: Response) => {
     if (!user) {
       return res.status(401).json({
         success: false,
-        message: 'Invalid username or password'
+        message: 'Invalid username'
       });
     }
 
     const passwordIsValid = await bcrypt.compare(password, user.password);
     if (!passwordIsValid) {
-      res.status(401), ({ message: 'Invalid username or password' });
-      return;
-    }
+  return res.status(401).json({
+    success: false,
+    message: 'Invalid username or password'
+  });
+}
 
     const token = jwt.sign(
-      { username: user.username },
+      { id: user.id, username: user.username },
       process.env.JWT_SECRET_KEY as string, {expiresIn: '1h'});
   
-    return res.status(220).json({
+    return res.status(200).json({
       success: true,
       token
     });
