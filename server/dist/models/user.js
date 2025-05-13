@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 export class User extends Model {
     // Hash the password before saving the user
     async setPassword(password) {
